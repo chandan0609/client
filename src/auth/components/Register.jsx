@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { registerUserAction } from "../redux/action/auth.action";
+import { useNavigate } from "react-router-dom";
 const initialState = {
   name: "",
   email: "",
@@ -7,6 +9,7 @@ const initialState = {
   password2: "",
 };
 const Register = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
 
@@ -19,6 +22,7 @@ const Register = () => {
     e.preventDefault();
     console.log(formData);
     dispatch(registerUserAction(formData));
+    navigate("/dashboard")
   };
   const { name, email, password, password2 } = formData;
   return (

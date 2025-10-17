@@ -18,7 +18,7 @@ const Dashboard = () => {
         <section className="container">
             <h2 className="my-2">Dashboard</h2>
             <p>You have not created a profile yet</p>
-            <Link to="/profile/createProfile" className = "btn btn-primary">
+            <Link to="/profile/createprofile" className = "btn btn-primary">
             Create Profile</Link>
         </section>
     )

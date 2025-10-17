@@ -21,7 +21,7 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    dispatch(registerUserAction(formData));
+    dispatch(registerUserAction(formData)).unwrap();
     navigate("/dashboard")
   };
   const { name, email, password, password2 } = formData;

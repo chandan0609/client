@@ -34,7 +34,7 @@ API.interceptors.request.use(
       return config;
     }
     if (token) {
-      console.log("inside the api.js adding token");
+      console.log(" profile inside the api.js adding token");
       config.headers["x-auth-token"] = token;
     }
     return config;

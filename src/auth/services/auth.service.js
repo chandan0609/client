@@ -25,7 +25,7 @@ export const loginUser = async (userData) => {
     // response(failure): {error validational details}
     const response = await API.post("/auth", userData);
     // below return is ur success response
-    console.log(response);
+    console.log(response.data);
     return { data: response.data, status: response.status };
   } catch (error) {}
 };
@@ -39,7 +39,7 @@ export const registerUser = async (userData) => {
     // response(failure): {error validational details}
     const response = await API.post("/users", userData);
     // below return is ur success response
-    console.log(response);
+    console.log(response.data);
     return { data: response.data, status: response.status };
   } catch (error) {}
 };

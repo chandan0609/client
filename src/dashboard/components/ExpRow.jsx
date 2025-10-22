@@ -1,22 +1,17 @@
-import React from 'react'
-
-const ExpRow = () => {
+import React from 'react';
+const ExpRow = ({ company, title, location, from, to }) => {
   return (
-    <>
-     <tr>
-            <td>Traversy Media</td>
-            <td class="hide-sm">Instructor & Developer</td>
-            <td class="hide-sm">
-              02-03-2015 - Now
-            </td>
-            <td>
-              <button class="btn btn-danger">
-                Delete
-              </button>
-            </td>
-          </tr>
-    </>
-  )
-}
-
-export default ExpRow
+<tr>
+<td>{company}</td>
+<td className="hide-sm">{title}</td>
+<td className="hide-sm">
+{from} - {to} </td>
+<td>
+<button className="btn btn-danger">
+Delete
+</button>
+</td>
+</tr>
+  );
+};
+export default ExpRow;

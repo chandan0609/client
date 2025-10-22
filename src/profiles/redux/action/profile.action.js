@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createProfile, getCurrentProfile } from "../../services/profile.service";
+import { addEducation, addExperience, createProfile, getCurrentProfile } from "../../services/profile.service";
 
 export const createProfileAction = createAsyncThunk(
   "profile/createProfileAction",
@@ -10,6 +10,28 @@ export const createProfileAction = createAsyncThunk(
     }
     catch(err){
       return rejectWithValue(err?.data || {message: "Failed to create or update profile"})
+    }
+  }
+)
+export const addEducationAction = createAsyncThunk(
+  "profile/addEducationAction",
+  async(formData,{rejectWithValue}) =>{
+    try{
+      const response = await addEducation(formData);
+      return {data:response.data,status:response.status}
+    }catch(err){
+    return rejectWithValue(err?.data || {message: "Failed to add Education"})
+    }
+  }
+)
+export const addExperienceAction = createAsyncThunk(
+  "profile/addExperienceAction",
+  async(formData,{rejectWithValue}) =>{
+    try{
+      const response = await addExperience(formData);
+      return {data:response.data,status:response.status}
+    }catch(err){
+    return rejectWithValue(err?.data || {message: "Failed to add Experience"})
     }
   }
 )

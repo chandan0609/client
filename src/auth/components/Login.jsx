@@ -2,6 +2,7 @@ import React from "react";
 import {useState} from 'react';
 import { useDispatch } from "react-redux";
 import { loginUserAction } from "../redux/action/auth.action";
+import { Link } from "react-router-dom";
 const Login = () => {
 // Fix: add () to useDispatch
 const dispatch = useDispatch();

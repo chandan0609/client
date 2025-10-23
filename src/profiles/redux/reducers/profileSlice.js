@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createProfileAction, getCurrentProfileAction } from "../action/profile.action";
+import { createEducationAction, createExperienceAction, createProfileAction, getCurrentProfileAction } from "../action/profile.action";
  
 const profileState = {
   profile: null,
@@ -40,6 +40,30 @@ const profileSlice = createSlice({
         state.error = action.payload;
         state.profile = null;
       })
+      .addCase(createEducationAction.pending,(state) => {
+        state.loading = true;
+      })
+      .addCase(createEducationAction.fulfilled,(state,action) => {
+        state.loading = false;
+        state.profile = action.payload.data
+      })
+      .addCase(createEducationAction.rejected, (state,action) => {
+        state.loading = false;
+        state.profile = action.payload
+      })
+
+      .addCase(createExperienceAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createExperienceAction.fulfilled, (state,action) => {
+        state.loading = false;
+        state.profile = action.payload.data
+      })
+      .addCase(createExperienceAction.rejected, (state,action) => {
+        state.loading = false;
+        state.profile = action.payload
+      })
+ 
  
   },
 });

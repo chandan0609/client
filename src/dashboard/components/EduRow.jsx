@@ -1,22 +1,18 @@
-import React from 'react'
-
-const EduRow = () => {
+import React from 'react';
+const EduRow = ({ school, degree, fieldofstudy, from, to }) => {
   return (
-    <>
-     <tr>
-              <td>Northern Essex</td>
-              <td class="hide-sm">Associates</td>
-              <td class="hide-sm">
-                02-03-2007 - 01-02-2009
-              </td>
-              <td>
-                <button class="btn btn-danger">
-                  Delete
-                </button>
-              </td>
-            </tr>
-    </>
-  )
-}
-
-export default EduRow
+    <tr>
+      <td>{school}</td>
+      <td className="hide-sm">{degree}</td>
+      <td className="hide-sm">
+        {from} - {to}
+      </td>
+      <td>
+        <button className="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+};
+export default EduRow;

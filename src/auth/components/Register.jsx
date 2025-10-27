@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUserAction } from "../redux/action/auth.action";
 import { useNavigate } from "react-router-dom";
+import { Container, Box, Typography, Stack, TextField, Button, Link } from "@mui/material";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import { Link as RouterLink } from 'react-router-dom'; // Ensure RouterLink is imported correctly for routing
+import CommonTextField from "../../core/components/common/TextField";
+import CommonButton from "../../core/components/common/Button";
+
 const initialState = {
   name: "",
   email: "",
   password: "",
   password2: "",
 };
+
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,71 +25,95 @@ const Register = () => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   // onSubmit
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
     dispatch(registerUserAction(formData)).unwrap();
-    navigate("/dashboard")
+    navigate("/dashboard");
   };
+
   const { name, email, password, password2 } = formData;
+
   return (
     <>
-      <section class="container">
-        <h1 class="large text-primary">Sign Up</h1>
-        <p class="lead">
-          <i class="fas fa-user"></i> Create Your Account
-        </p>
-        <form class="form" onSubmit={onSubmit}>
-          <div class="form-group">
-            <input
-              type="text"
-              placeholder="Name"
+      <Container maxWidth="sm" sx={{ mt: 8 }}>
+        {/* Header */}
+        <Box textAlign="center" mb={4}>
+          <Typography variant="h3" color="primary" fontWeight={700} gutterBottom>
+            Sign Up
+          </Typography>
+          <Typography variant="h6" color="text.secondary">
+            <PersonAddAltIcon sx={{ verticalAlign: "middle", mr: 1 }} />
+            Create Your Account
+          </Typography>
+        </Box>
+
+        {/* Form */}
+        <Box component="form" onSubmit={onSubmit}>
+          <Stack spacing={3}>
+            <CommonTextField
+              label="Name"
               name="name"
               required
               value={name}
               onChange={onChange}
+              fullWidth
             />
-          </div>
-          <div class="form-group">
-            <input
-              type="email"
-              placeholder="Email Address"
+            <CommonTextField
+              label="Email Address"
               name="email"
+              type="email"
               value={email}
               onChange={onChange}
+              fullWidth
+              helperText="This site uses Gravatar. Use a Gravatar email for your profile image."
             />
-            <small class="form-text">
-              This site uses Gravatar so if you want a profile image, use a
-              Gravatar email
-            </small>
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              placeholder="Password"
+            <CommonTextField
+              label="Password"
               name="password"
-              minLength="6"
+              type="password"
+              inputProps={{ minLength: 6 }}
               value={password}
               onChange={onChange}
+              fullWidth
             />
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              placeholder="Confirm Password"
+            <CommonTextField
+              label="Confirm Password"
               name="password2"
-              minLength="6"
+              type="password"
+              inputProps={{ minLength: 6 }}
               value={password2}
               onChange={onChange}
+              fullWidth
             />
-          </div>
-          <input type="submit" class="btn btn-primary" value="Register" />
-        </form>
-        <p class="my-1">
-          Already have an account? <a href="login.html">Sign In</a>
-        </p>
-      </section>
+            <CommonButton
+              type="submit"
+              variant="contained"
+              color="danger"
+              size="large"
+              sx={{ py: 1.2, textTransform: "none", fontWeight: 600 }}
+              label="Register"
+            >
+            </CommonButton>
+          </Stack>
+        </Box>
+
+        {/* Footer */}
+        <Typography variant="body1" align="center" sx={{ mt: 3 }}>
+          Already have an account?{" "}
+          <Link
+            component={RouterLink}
+            to="/auth/login"
+            underline="hover"
+            color="primary"
+            fontWeight={600}
+          >
+            Sign In
+          </Link>
+        </Typography>
+      </Container>
     </>
   );
 };

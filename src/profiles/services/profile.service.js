@@ -46,3 +46,33 @@ export const getCurrentProfile = async () => {
         throw{data: error.response.data, status: error.response.status}
     }
 }
+export const getAllProfiles = async () => {
+    try{
+        const response = await API.get("/profile/")
+        return{
+            data:response.data,
+            status:response.status
+        }
+    }
+    catch(error){
+        console.log(error.response)
+        throw{data:error.response.data,status:error.response.status}
+    }
+}
+export const getProfileById = async(userId) => {
+try{
+const response = await API.
+get(`/profile/user/${userId}`)
+return{
+data:response.data,
+            status:response.
+status
+}
+}
+catch(error){
+console.log(error.
+response)
+throw{data:error.response.
+data,status:error.response.status}
+    }
+}

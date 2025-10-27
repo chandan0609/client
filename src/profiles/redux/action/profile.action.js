@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addEducation, addExperience, createProfile, getCurrentProfile } from "../../services/profile.service";
+import { addEducation, addExperience, createProfile, getAllProfiles, getCurrentProfile, getProfileById } from "../../services/profile.service";
 
 export const createProfileAction = createAsyncThunk(
   "profile/createProfileAction",
@@ -13,6 +13,7 @@ export const createProfileAction = createAsyncThunk(
     }
   }
 )
+
 export const addEducationAction = createAsyncThunk(
   "profile/addEducationAction",
   async(formData,{rejectWithValue}) =>{
@@ -57,3 +58,46 @@ export const getCurrentProfileAction = createAsyncThunk(
         }
       }
     );
+
+    export const getAllProfilesAction = createAsyncThunk(
+      'profile/getAllProfilesAction',
+      async(_,{rejectWithValue}) => {
+        try{
+          const response = await getAllProfiles();
+          console.log(response);
+          if(response.status === 200){
+            return {status:200,data:response.data}
+          }
+        } catch(err){
+          const status = err?.status || err?.response?.status;
+          if(status === 400) return rejectWithValue({
+            notFound:true, status:400
+          })
+          return rejectWithValue(
+            err?.data || {message:"Failed to Load Profiles"}
+          )
+        }
+      }
+    )
+    export const getProfileByIdAction = createAsyncThunk(
+'profile/getProfileByIdAction',
+async(userId, {rejectWithValue}) => {
+try{
+const response = await getProfileById(userId);
+console.log(response);
+if(response.status===200){
+return response.
+data;
+}
+} catch(err){
+const status = err?.
+status || err?.response?.status;
+if(status === 400) return rejectWithValue({
+notFound:true,status:400
+})
+return rejectWithValue(
+err?.data || {message:"Failed to Load Profile"}
+)
+    }
+}
+)

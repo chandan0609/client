@@ -1,6 +1,20 @@
-import React, 
-{ useState } from 'react'; import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import {
+Container,
+Typography,
+TextField,
+Button,
+FormControlLabel,
+Checkbox,
+Paper,
+Box,
+Grid,
+Divider
+} from '@mui/material';
+import SchoolIcon from '@mui/icons-material/School';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { addEducationAction } from '../../redux/action/profile.action';
 const emptyForm = {
 school: '',
@@ -20,8 +34,9 @@ const { school, degree, fieldofstudy, from, to, current, description } = formSta
 const onChange = (e) => {
 setFormState({
 ...formState,
-[e.target.name]: e.target.value
-    });
+[e.target.name]: e.
+target.value
+});
 };
 const onCheckboxChange = () => {
 setFormState({
@@ -34,102 +49,142 @@ setToDateDisabled(!toDateDisabled);
 };
 const onSubmit = (e) => {
 e.preventDefault();
-dispatch(addEducationAction(formState)).
-unwrap();
+dispatch(addEducationAction(formState)).unwrap();
 navigate('/dashboard');
-};
-  return (
-<>
-<section className="container">
-<h1 className="large text-primary">Add Your Education</h1>
-<p className="lead">
-<i className="fas fa-graduation-cap"></i> Add any school, bootcamp, etc.
-that
-you have attended
-</p>
-<small>* = required field</small>
-<form className="form" onSubmit={onSubmit}>
-<div className="form-group">
-<input
-type="text"
-placeholder="* School or Bootcamp"
+  };
+return (
+<Container maxWidth="md" sx={{ py: 4 }}>
+<Paper elevation={3} sx={{ p: 4 }}>
+<Typography variant="h4" color="primary" gutterBottom>
+Add Your Education
+</Typography>
+<Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+<SchoolIcon color="primary" sx={{ mr: 1 }} />
+<Typography variant="subtitle1">
+Add any school, bootcamp, etc.
+that you have attended
+</Typography>
+</Box>
+<Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 3 }}>
+* = required field
+</Typography>
+<Box component="form" onSubmit={onSubmit} noValidate>
+<Grid container spacing={3}>
+<Grid item xs={12}>
+<TextField
+                fullWidth
+required
+label="School or Bootcamp"
 name="school"
 value={school}
 onChange={onChange}
-required
-            />
-</div>
-<div className="form-group">
-<input
-type="text"
-placeholder="* Degree or Certificate"
+placeholder="* School or Bootcamp"
+variant="outlined"
+/>
+</Grid>
+<Grid item xs={12}>
+<TextField
+fullWidth
+                required
+label="Degree or Certificate"
 name="degree"
 value={degree}
 onChange={onChange}
-              required
+placeholder="* Degree or Certificate"
+variant="outlined"
 />
-</div>
-<div className="form-group">
-<input
-type="text"
-placeholder="* Field of Study"
+</Grid>
+<Grid item xs={12}>
+<TextField
+                fullWidth
+required
+label="Field of Study"
 name="fieldofstudy"
 value={fieldofstudy}
 onChange={onChange}
-required
-            />
-</div>
-<div className="form-group">
-<h4>From Date</h4>
-<input
+placeholder="* Field of Study"
+variant="outlined"
+              />
+</Grid>
+<Grid item xs={12} md={6}>
+<Typography variant="subtitle2" gutterBottom>
+From Date
+</Typography>
+<TextField
+fullWidth
 type="date"
 name="from"
 value={from}
 onChange={onChange}
-/>
-</div>
-<div className="form-group">
-<p>
-<input
-type="checkbox"
-name="current"
+InputLabelProps={{ shrink: true }}
+variant="outlined"
+              />
+</Grid>
+<Grid item xs={12}>
+<FormControlLabel
+control={
+<Checkbox
 checked={current}
 onChange={onCheckboxChange}
-/>{' '}
-Current School
-</p>
-</div>
-<div className="form-group">
-<h4>To Date</h4>
-<input
+name="current"
+color="primary"
+/>
+}
+label="Current School"
+/>
+</Grid>
+<Grid item xs={12} md={6}>
+<Typography variant="subtitle2" gutterBottom>
+                To Date
+</Typography>
+<TextField
+fullWidth
 type="date"
 name="to"
 value={to}
 onChange={onChange}
 disabled={toDateDisabled}
-            />
-</div>
-<div className="form-group">
-<textarea
+InputLabelProps={{ shrink: true }}
+variant="outlined"
+              />
+</Grid>
+<Grid item xs={12}>
+<TextField
+fullWidth
+multiline
+rows={5}
+label="Program Description"
 name="description"
-cols="30"
-rows="5"
-placeholder="Program Description"
 value={description}
 onChange={onChange}
-></textarea>
-</div>
-<input type="submit" className="btn btn-primary my-1" />
-<button
-className="btn btn-light my-1"
-type="button"
-onClick={() => navigate('/dashboard')}
+placeholder="Program Description"
+variant="outlined"
+              />
+</Grid>
+</Grid>
+<Divider sx={{ my: 4 }} />
+<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+<Button
+type="submit"
+variant="contained"
+color="primary"
+sx={{ textTransform: 'none', fontWeight: 600 }}
 >
-Go Back
-</button>
-</form>
-</section>
-</>
-  );
+Submit
+</Button>
+<Button
+variant="outlined"
+color="secondary"
+startIcon={<ArrowBackIcon />}
+onClick={() => navigate('/dashboard')}
+sx={{ textTransform: 'none' }}
+>
+              Go Back
+</Button>
+</Box>
+</Box>
+</Paper>
+</Container>
+);
 };
 export default AddEducation;

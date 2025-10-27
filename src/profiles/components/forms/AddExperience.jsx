@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import {
+Container,
+Typography,
+TextField,
+Button,
+FormControlLabel,
+  Checkbox, 
+Paper,
+Box,
+Grid,
+Divider
+} from '@mui/material';
+import WorkIcon from '@mui/icons-material/Work';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { addExperienceAction } from "../../redux/action/profile.action";
 const emptyForm = {
 title: "",
@@ -29,106 +43,145 @@ setFormState({
 current: !current,
 to: current ?
 "" : to
-    });
+});
 setToDateDisabled(!toDateDisabled);
-  };
+};
 const onSubmit = (e) => {
-    e.
-preventDefault();
-dispatch(addExperienceAction(formState)).
-unwrap();
+e.preventDefault();
+dispatch(addExperienceAction(formState)).unwrap();
 navigate('/dashboard');
 };
 return (
-<>
-<section className="container">
-<h1 className="large text-primary"> Add An Experience </h1>
-<p className="lead">
-<i className="fas fa-code-branch"></i> Add any developer/programming
-positions that you have had in the past
-</p>
-<small>* = required field</small>
-<form className="form" onSubmit={onSubmit}>
-<div className="form-group">
-<input
-type="text"
-placeholder="* Job Title"
+<Container maxWidth="md" sx={{ py: 4 }}>
+<Paper elevation={3} sx={{ p: 4 }}>
+<Typography variant="h4" color="primary" gutterBottom>
+Add An Experience
+</Typography>
+<Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+<WorkIcon color="primary" sx={{ mr: 1 }} />
+<Typography variant="subtitle1">
+Add any developer/programming positions that you have had in the past
+</Typography>
+</Box>
+<Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 3 }}>
+* = required field
+</Typography>
+<Box component="form" onSubmit={onSubmit} noValidate>
+<Grid container spacing={3}>
+<Grid item xs={12}>
+<TextField
+fullWidth
+required
+label="Job Title"
 name="title"
 value={title}
 onChange={onChange}
-              required
+placeholder="* Job Title"
+variant="outlined"
 />
-</div>
-<div className="form-group">
-<input
-type="text"
-placeholder="* Company"
+</Grid>
+<Grid item xs={12}>
+<TextField
+fullWidth
+                required
+label="Company"
 name="company"
 value={company}
 onChange={onChange}
-              required
-/>
-</div>
-<div className="form-group">
-<input
-type="text"
-placeholder="Location"
+placeholder="* Company"
+variant="outlined"
+              />
+</Grid>
+<Grid item xs={12}>
+              <TextField
+fullWidth
+label="Location"
 name="location"
 value={location}
 onChange={onChange}
-            />
-</div>
-<div className="form-group">
-<h4>From Date</h4>
-<input
+placeholder="Location"
+variant="outlined"
+/>
+</Grid>
+<Grid item xs={12} md={6}>
+<Typography variant="subtitle2" gutterBottom>
+From Date
+</Typography>
+<TextField
+fullWidth
 type="date"
 name="from"
 value={from}
 onChange={onChange}
+InputLabelProps={{ shrink: true }}
+variant="outlined"
 />
-</div>
-<div className="form-group">
-<p>
-<input
-type="checkbox"
-name="current"
+</Grid>
+<Grid item xs={12}>
+<FormControlLabel
+control={
+<Checkbox
 checked={current}
 onChange={onCheckboxChange}
-/>{' '}
-Current Job
-</p>
-</div>
-<div className="form-group">
-<h4>To Date</h4>
-<input
+name="current"
+color="primary"
+/>
+}
+label="Current Job"
+/>
+</Grid>
+<Grid item xs={12} md={6}>
+<Typography variant="subtitle2" gutterBottom>
+                To Date
+</Typography>
+<TextField
+fullWidth
 type="date"
 name="to"
 value={to}
 onChange={onChange}
 disabled={toDateDisabled}
+InputLabelProps={{ shrink: true }}
+variant="outlined"
 />
-</div>
-<div className="form-group">
-<textarea
+</Grid>
+<Grid item xs={12}>
+<TextField
+fullWidth
+multiline
+rows={5}
+label="Job Description"
 name="description"
-cols="30"
-rows="5"
-placeholder="Job Description"
 value={description}
 onChange={onChange}
-></textarea>
-</div>
-<input type="submit" className="btn btn-primary my-1" />
-<button
-className="btn btn-light my-1"
-type="button"
-onClick={() => navigate('/dashboard')}
+placeholder="Job Description"
+variant="outlined"
+              />
+</Grid>
+</Grid>
+<Divider sx={{ my: 4 }} />
+<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+<Button
+type="submit"
+variant="contained"
+color="primary"
+sx={{ textTransform: 'none', fontWeight: 600 }}
 >
-Go Back
-</button>
-</form>
-</section>
-    </>
+Submit
+</Button>
+<Button
+variant="outlined"
+color="secondary"
+startIcon={<ArrowBackIcon />}
+onClick={() => navigate('/dashboard')}
+sx={{ textTransform: 'none' }}
+>
+              Go Back
+</Button>
+</Box>
+</Box>
+</Paper>
+</Container>
 );
 };
 export default AddExperience;

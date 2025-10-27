@@ -6,11 +6,11 @@ const EduDetails = () => {
 const profile = useSelector((state) => state.
 profile.
 profile);
-console.log('EduDetails rendering, profile:', profile);
+
 // The education array is inside profile.data, not directly in profile
 const educationArray = profile?.
 data?.education;
-console.log('Education array:', educationArray);
+
 // Check if the education array exists and has elements
 if (!
 educationArray || educationArray.length === 0) {

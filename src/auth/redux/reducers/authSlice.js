@@ -4,9 +4,9 @@ import {
   loginUserAction,
   registerUserAction,
 } from "../action/auth.action";
-
+const token = localStorage.getItem("token");
 const authState = {
-  isAuthenticated: false,
+  isAuthenticated: !!token,
   user: null,
   loading: false,
   error: null,
@@ -42,8 +42,8 @@ const authSlice = createSlice({
       .addCase(loginUserAction.fulfilled, (state, action) => {
         state.loading = false;
         state.isAuthenticated = true;
-        state.token = action.payload.data.token;
-        localStorage.setItem("token", action.payload.data.token);
+        state.token = action?.payload?.data?.token;
+        localStorage.setItem("token", action?.payload?.data?.token);
       })
       .addCase(loginUserAction.rejected)
       .addCase(loadUserAction.pending, (state) => {
@@ -53,11 +53,18 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuthenticated = true;
         console.log(action.payload.data);
-        state.user = action.payload.data; // user details
+        state.user = action?.payload?.data; // user details
       })
       .addCase(loadUserAction.rejected);
   }, // all rest calls.
-  reducers: {}, //common business logic related to auth no rest calls
+  reducers: {
+    logout:(state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem("token")
+    }
+  }, //common business logic related to auth no rest calls
 });
-
+export const {logout} = authSlice.actions
 export default authSlice.reducer;

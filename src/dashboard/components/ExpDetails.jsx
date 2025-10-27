@@ -4,10 +4,10 @@ import ExpRow from './ExpRow';
 const ExpDetails = () => {
 // Get the profile object from Redux store
 const profile = useSelector((state) => state.profile.profile);
-console.log('ExpDetails rendering, profile:', profile);
+
 // The experience array is inside profile.data, not directly in profile
 const experienceArray = profile?.data?.experience;
-console.log('Experience array:', experienceArray);
+
 // Check if the experience array exists and has elements
 if (!experienceArray || experienceArray.length === 0) {
 return <div>No Experience Details Available</div>;

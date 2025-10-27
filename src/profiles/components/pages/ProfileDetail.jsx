@@ -83,7 +83,7 @@ return (
 <Container maxWidth="lg" sx={{ py: 4 }}>
 <Button
 component={RouterLink}
-to="/profiles"
+to="/profile/profile"
 startIcon={<ArrowBackIcon />}
 variant="contained"
 color="primary"

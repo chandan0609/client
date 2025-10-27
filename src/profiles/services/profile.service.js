@@ -61,12 +61,12 @@ export const getAllProfiles = async () => {
 }
 export const getProfileById = async(userId) => {
 try{
-const response = await API.
-get(`/profile/user/${userId}`)
+console.log("i am in service of getProfileById")
+const response = await API.get(`/profile/user/${userId}`)
+console.log (response)
 return{
 data:response.data,
-            status:response.
-status
+            status:response.status
 }
 }
 catch(error){

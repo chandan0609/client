@@ -86,8 +86,7 @@ try{
 const response = await getProfileById(userId);
 console.log(response);
 if(response.status===200){
-return response.
-data;
+return response.data;
 }
 } catch(err){
 const status = err?.

@@ -81,7 +81,7 @@ boxShadow: '0px 2px 4px rgba(0,0,0,0.1)'
 )}
 <Button
 component={RouterLink}
-to={`/profile/${profile.
+to={`/profile/profile/${profile.
 user._id}`}
 variant="contained"
 color="primary"

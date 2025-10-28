@@ -63,6 +63,7 @@ export const getProfileById = async(userId) => {
 try{
 console.log("i am in service of getProfileById")
 const response = await API.get(`/profile/user/${userId}`)
+console.log("i got the response from the server")
 console.log (response)
 return{
 data:response.data,

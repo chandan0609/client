@@ -20,8 +20,10 @@ const onChange = (e) => {
   };
 const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUserAction(formData));
-    navigate("/dashboard");
+    dispatch(loginUserAction(formData))
+    .then(() => {
+      navigate("/dashboard");
+    })
   };
 const { name, email, password } = formData;
 return (

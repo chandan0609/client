@@ -3,6 +3,8 @@ import {
   submitPostAction,
   loadPostsAction,
   deletePostAction,
+  getPostByIdAction,
+  addCommentAction,
 } from "../action/post.action"; // Hypothetical actions for post management
 const postState = {
   post: null,
@@ -57,7 +59,44 @@ const postSlice = createSlice({
       .addCase(deletePostAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      });
+      })
+      .addCase(getPostByIdAction.pending,(state)=>{
+        state.loading = true;
+      })
+      .addCase(getPostByIdAction.fulfilled,(state,action) => {
+          state.loading = false;
+          state.post = action.payload
+      })
+      .addCase(getPostByIdAction.rejected,(state,action) => {
+          console.log(action);
+          state.loading=false;
+          state.error = action.payload
+          state.post = null
+      })
+      .addCase(addCommentAction.pending,(state) => {
+        state.loading = true;
+      })
+      .addCase(addCommentAction.
+fulfilled, (state, action) => {
+state.loading = false;
+// Update comments in the current post if it's loaded
+console.log(action.payload.data.comment)
+if (state.post && state.post._id === action.payload.postId) {
+state.post.comments = action.payload.data;
+        }
+      const postIndex = state.posts.
+findIndex(p => p._id === action.payload.postId);
+if (postIndex !== -1) {
+state.posts[postIndex].
+comments = action.payload.data;
+}})
+      .addCase(addCommentAction.
+rejected, (state, action) => {
+state.loading = false;
+state.error = action.
+payload || action.error.message;
+      })
+
   },
   reducers: {}, // Common business logic related to posts
 });

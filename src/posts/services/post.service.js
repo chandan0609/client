@@ -43,3 +43,39 @@ export const loadPost = async () => {
     throw error.response.data;
   }
 };
+
+export const getPostById = async (id) => {
+  try {
+    const response = await API.get(`/posts/${id}`)
+    console.log(response)
+    return{
+      data:response.data,
+      status:response.status
+    }
+  }
+  catch(error){
+    console.log(error.response)
+    throw{
+      data:error.response.data,
+      status:error.response.status
+    }
+  }
+}
+export const addComment = async (id,commentData) => {
+  try{
+    console.log("i am in service")
+    const response = await API.post(`posts/comment/${id}`,commentData)
+    console.log(response)
+    return{
+      data:response.data,
+      status:response.status
+    }
+  }
+  catch(error){
+    console.log(error)
+    throw{
+      data:error.response.data,
+      status:error.response.status
+    }
+  }
+}
